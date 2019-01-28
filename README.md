@@ -10,3 +10,7 @@ Folder structure created. First commit.
 2:34pm -> des.kc.assets
 
 Added web assets.
+
+3:11pm -> dev.kc.initialJS
+
+Added some JS to change headers.
