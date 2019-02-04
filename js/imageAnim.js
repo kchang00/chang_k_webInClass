@@ -15,6 +15,10 @@
 		puzzleBoard = document.querySelector(".puzzle-board"),
 		puzzleSelectors = document.querySelectorAll("#buttonHolder img");
 
+	//node list is like an array we can iterate over
+
+	let dropZones = document.querySelectorAll('.drop-zone');
+
 	// functions in the middle
 	function createPuzzlePieces(pictureIndex) {
 		//generate puzzle pieces for the left hand side randomly
@@ -28,7 +32,39 @@
 	// $ reference a variable 
 
 		puzzleBoard.style.backgroundImage = `url(./images/backGround${pictureIndex}.jpg)`;
+	
+		initDrag();
+
 	}
+
+	// drag and drop functionality goes here
+	
+	function initDrag() {
+		piecesBoard.querySelectorAll('img').forEach(img => {
+			img.addEventListener("dragstart", function(e) {
+				console.log('Go ahead and drag')
+
+				e.dataTransfer.setData('text/plain', this.id);
+			})
+		})
+	}
+
+	// handle dragover and drop
+	
+	dropZones.forEach(zone => {
+		zone.addEventListener('dragover', function(e) {
+			e.preventDefault();
+			console.log('AH PUT ME DOWN!');
+		});
+
+		zone.addEventListener('drop', function(e) {
+			e.preventDefault();
+			console.log('I ate it uwu');
+
+			let piece = e.dataTransfer.getData('text/plain');
+			e.target.appendChild(document.querySelector(`#${piece}`));
+		});
+	});
 
 	function resetPuzzlePieces() {
 		// swap out all of the images when clicking on a bottom button
